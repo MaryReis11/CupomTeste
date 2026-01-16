@@ -29,6 +29,9 @@ public class CupomRequest {
 
 	boolean published;
 	
+	public CupomRequest(String string, String string2, BigDecimal valueOf, LocalDateTime plusDays, boolean b) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCode() {
 		return code;
 	}

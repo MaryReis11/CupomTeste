@@ -21,6 +21,10 @@ public class CupomResponse {
     private Status status;
     private boolean published;
     private boolean redeemed;
+	public CupomResponse(UUID cupomId, String string, String string2, BigDecimal valueOf, LocalDateTime plusDays,
+			Status active, boolean b, boolean c) {
+		// TODO Auto-generated constructor stub
+	}
 	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}

@@ -28,4 +28,9 @@ public class NegocioException extends RuntimeException {
     public String getMensagem() {
         return mensagem;
     }
+
+	public Object getErro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

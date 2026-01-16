@@ -10,4 +10,5 @@ import com.cupom.CupomTeste.model.Cupom;
 
 @Repository
 public interface CupomRepository extends JpaRepository<Cupom, UUID> {
+    Optional<Cupom> findByCode(String code);
 }
