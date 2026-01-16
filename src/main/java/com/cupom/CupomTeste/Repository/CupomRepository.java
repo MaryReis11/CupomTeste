@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 import com.cupom.CupomTeste.model.Cupom;
 
 @Repository
-public interface CupomRepository  extends JpaRepository<Cupom, UUID> {
-	Optional<Cupom> findById(UUID id);
-
+public interface CupomRepository extends JpaRepository<Cupom, UUID> {
 }

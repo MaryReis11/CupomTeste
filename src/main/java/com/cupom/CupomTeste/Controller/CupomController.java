@@ -14,31 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cupom.CupomTeste.Service.CupomService;
-import com.cupom.CupomTeste.model.Cupom;
 import com.cupom.CupomTeste.model.dto.CupomRequest;
 import com.cupom.CupomTeste.model.dto.CupomResponse;
-
 
 @RestController
 @RequestMapping("/coupon")
 public class CupomController {
 
-	 @Autowired
-	    CupomService cupomService;
+    @Autowired
+    private CupomService cupomService;
 
-	    @PostMapping
-	    public ResponseEntity<CupomResponse> createCupom(@RequestBody CupomRequest cupomRequest) {
-	        return cupomService.createCupom(cupomRequest);
-	    }
+    @PostMapping
+    public ResponseEntity<CupomResponse> createCupom(@RequestBody CupomRequest cupomRequest) {
+        return cupomService.createCupom(cupomRequest);
+    }
 
-	    @GetMapping("{id}")
-	    public ResponseEntity<CupomResponse> getCupomById(@PathVariable UUID id) {
-	        return cupomService.getCupomById(id);
-	    }
+    @GetMapping("{id}")
+    public ResponseEntity<CupomResponse> getCupomById(@PathVariable UUID id) {
+        return cupomService.getCupomById(id);
+    }
 
-	    @DeleteMapping("{id}")
-	    public ResponseEntity<Void> deleteCupom(@PathVariable UUID id) {
-	        cupomService.deleteCupom(id);
-	        return ResponseEntity.noContent().build();
-	    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteCupom(@PathVariable UUID id) {
+        cupomService.deleteCupom(id);
+        return ResponseEntity.noContent().build(); // Deletado com sucesso
+    }
 }

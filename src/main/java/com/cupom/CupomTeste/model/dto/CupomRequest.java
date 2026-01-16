@@ -1,16 +1,62 @@
 package com.cupom.CupomTeste.model.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
-public record CupomRequest (
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-		String code,
-	    String description,
-	    BigDecimal discountValue,
-	    OffsetDateTime expirationDate, // <-- aqui
-	    boolean published
-) {}
-	   
+@Getter
+@AllArgsConstructor
+public class CupomRequest {
+
+	@NotBlank
+	@Size(min = 1, max = 255)
+	String code;
+
+	@NotBlank
+	String description;
+
+	@DecimalMin("0.5")
+	BigDecimal discountValue;
+
+	@NotNull
+	LocalDateTime expirationDate;
+
+	boolean published;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public LocalDateTime getExpirationDate() {
+		return expirationDate;
+	}
+	public void setExpirationDate(LocalDateTime expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+	public BigDecimal getDiscountValue() {
+		return discountValue;
+	}
+	public void setDiscountValue(BigDecimal discountValue) {
+		this.discountValue = discountValue;
+	}
+	public boolean isPublished() {
+		return published;
+	}
+	public void setPublished(boolean published) {
+		this.published = published;
+	}
+}

@@ -1,13 +1,8 @@
 package com.cupom.CupomTeste.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.UUID;
-
-import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.cupom.CupomTeste.model.Status.Status;
 
@@ -17,34 +12,43 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "coupons")
 public class Cupom {
 
-	@Id
+    @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "VARCHAR(36)")
     private UUID id;
 
+    @Column(nullable = false, length = 6)
     private String code;
 
     @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
     private BigDecimal discountValue;
 
     @Column(nullable = false)
     private LocalDateTime expirationDate;
 
+    @Column(nullable = false)
     private Status status;
 
+    @Column(nullable = false)
     private boolean published;
 
+    @Column(nullable = false)
     private boolean redeemed;
 
 

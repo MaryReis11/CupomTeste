@@ -15,25 +15,30 @@ import com.cupom.CupomTeste.model.dto.CupomResponse;
 @Mapper(componentModel = "spring")
 public interface CupomMapper {
 
-    @Mapping(source = "status", target = "status") // MapStruct vai usar método custom se tipos forem diferentes
     CupomResponse toResponse(Cupom cupom);
 
     Cupom toEntity(CupomRequest cupomRequest);
 
-    default LocalDateTime map(OffsetDateTime odt) {
-        return odt == null ? null : odt.toLocalDateTime();
+    // Converter OffsetDateTime -> LocalDateTime
+    default LocalDateTime map(OffsetDateTime value) {
+        if (value == null) return null;
+        return value.toLocalDateTime();
     }
 
-    default OffsetDateTime map(LocalDateTime ldt) {
-        return ldt == null ? null : ldt.atOffset(ZoneOffset.UTC);
+    // Converter LocalDateTime -> OffsetDateTime se precisar do inverso
+    default OffsetDateTime map(LocalDateTime value) {
+        if (value == null) return null;
+        return value.atOffset(java.time.ZoneOffset.UTC);
     }
-    // Converte Status -> String
+
+    // Se precisar mapear status para string (ou outro DTO)
     default String map(Status status) {
-        return status == null ? null : status.name();
+        if (status == null) return null;
+        return status.name();
     }
 
-    // Converte String -> Status
     default Status map(String status) {
-        return status == null ? null : Status.valueOf(status.toUpperCase());
+        if (status == null) return null;
+        return Status.valueOf(status);
     }
 }
