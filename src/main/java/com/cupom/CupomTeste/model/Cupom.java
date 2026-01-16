@@ -2,12 +2,20 @@ package com.cupom.CupomTeste.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.UUID;
+
+import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.GenericGenerator;
+
+import com.cupom.CupomTeste.model.Status.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -15,89 +23,34 @@ import lombok.Getter;
 @Entity
 @Table(name = "coupons")
 public class Cupom {
-	
+
 	@Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "VARCHAR(36)")
     private UUID id;
 
-    @Column(nullable = false, length = 6)
     private String code;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
     private BigDecimal discountValue;
 
     @Column(nullable = false)
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
 
-    @Column(nullable = false)
+    private Status status;
+
     private boolean published;
 
-    @Column(nullable = false)
-    private boolean deleted;
+    private boolean redeemed;
 
-    protected Cupom() {
+
+    public Cupom() {
     }
 
-    public Cupom(String code,
-                 String description,
-                 BigDecimal discountValue,
-                 LocalDate expirationDate,
-                 boolean published) {
-
-        this.code = sanitizeCode(code);
-        this.description = description;
-        this.discountValue = discountValue;
-        this.expirationDate = expirationDate;
-        this.published = published;
-        this.deleted = false;
-
-        validate();
-    }
-
-    private void validate() {
-        if (discountValue.compareTo(BigDecimal.valueOf(0.5)) < 0) {
-            throw new RuntimeException("Discount value must be at least 0.5");
-        }
-
-        if (expirationDate.isBefore(LocalDate.now())) {
-            throw new RuntimeException("Expiration date cannot be in the past");
-        }
-    }
-
-    private String sanitizeCode(String rawCode) {
-        if (rawCode == null) {
-            throw new RuntimeException("Code is required");
-        }
-
-        String sanitized = rawCode.replaceAll("[^a-zA-Z0-9]", "");
-
-        if (sanitized.length() != 6) {
-            throw new RuntimeException("Coupon code must have exactly 6 characters");
-        }
-
-        return sanitized;
-    }
-
-    // ✅ regra de negócio
-    public void deletar() {
-        if (this.deleted) {
-            throw new RuntimeException("Coupon already deleted");
-        }
-        this.deleted = true;
-    }
-    
-    public boolean isPublished() {
-        return published;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-    // 👇 Getters manuais(o ideal seria a notação para ficar mais limpo, mas parece que estou com problema de versão e não consigo arrumar
-    //a tempo de terminar o teste
     public UUID getId() {
         return id;
     }
@@ -106,24 +59,55 @@ public class Cupom {
         return code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public BigDecimal getDiscountValue() {
         return discountValue;
     }
 
-    public LocalDate getExpirationDate() {
+    public void setDiscountValue(BigDecimal discountValue) {
+        this.discountValue = discountValue;
+    }
+
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public boolean getPublished() {
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public boolean isPublished() {
         return published;
     }
 
-    public boolean getDeleted() {
-        return deleted;
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
+    public boolean isRedeemed() {
+        return redeemed;
+    }
+
+    public void setRedeemed(boolean redeemed) {
+        this.redeemed = redeemed;
+    }
 }
