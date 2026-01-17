@@ -6,11 +6,6 @@ import java.util.UUID;
 
 import com.cupom.CupomTeste.model.Status.Status;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
 public class CupomResponse {
 
     private UUID id;
@@ -21,6 +16,7 @@ public class CupomResponse {
     private Status status;
     private boolean published;
     private boolean redeemed;
+	
 	public CupomResponse(UUID cupomId, String string, String string2, BigDecimal valueOf, LocalDateTime plusDays,
 			Status active, boolean b, boolean c) {
 		// TODO Auto-generated constructor stub

@@ -1,22 +1,17 @@
 package com.cupom.CupomTeste.Controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-import com.cupom.CupomTeste.Exception.NegocioException;
-import com.cupom.CupomTeste.Exception.TabelaDeErros;
-import com.cupom.CupomTeste.model.Status.Status;
-import com.cupom.CupomTeste.model.dto.CupomRequest;
-import com.cupom.CupomTeste.model.dto.CupomResponse;
-import com.cupom.CupomTeste.Service.CupomService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +23,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.cupom.CupomTeste.Exception.NegocioException;
+import com.cupom.CupomTeste.Exception.TabelaDeErros;
+import com.cupom.CupomTeste.Service.CupomService;
+import com.cupom.CupomTeste.model.dto.CupomRequest;
 
 @WebMvcTest(CupomController.class)
 @DisplayName("Testes da classe CupomController")

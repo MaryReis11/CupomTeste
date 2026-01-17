@@ -29,8 +29,13 @@ public class NegocioException extends RuntimeException {
         return mensagem;
     }
 
-	public Object getErro() {
-		// TODO Auto-generated method stub
-		return null;
+	public TabelaDeErros getErro() {
+		// Encontra o enum correspondente ao código de erro
+		for (TabelaDeErros erro : TabelaDeErros.values()) {
+			if (erro.getCodigoDeErro().equals(this.codigoDeErro)) {
+				return erro;
+			}
+		}
+		return TabelaDeErros.ERRO_INTERNO;
 	}
 }

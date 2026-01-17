@@ -7,11 +7,8 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
+
 public class CupomRequest {
 
 	@NotBlank
@@ -29,7 +26,7 @@ public class CupomRequest {
 
 	boolean published;
 	
-	public CupomRequest(String string, String string2, BigDecimal valueOf, LocalDateTime plusDays, boolean b) {
+	public CupomRequest() {
 		// TODO Auto-generated constructor stub
 	}
 	public String getCode() {

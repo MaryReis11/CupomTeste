@@ -207,7 +207,7 @@ class CupomRepositoryTest {
         assertNotNull(retrievedCupom);
         assertEquals("ABC123", retrievedCupom.getCode());
         assertEquals("Cupom de teste", retrievedCupom.getDescription());
-        assertEquals(BigDecimal.valueOf(10.0), retrievedCupom.getDiscountValue());
+        assertEquals(0, BigDecimal.valueOf(10.0).compareTo(retrievedCupom.getDiscountValue()));
         assertEquals(Status.ACTIVE, retrievedCupom.getStatus());
         assertTrue(retrievedCupom.isPublished());
     }

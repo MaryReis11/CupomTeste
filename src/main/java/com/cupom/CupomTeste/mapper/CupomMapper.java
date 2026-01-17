@@ -2,10 +2,8 @@ package com.cupom.CupomTeste.mapper;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.cupom.CupomTeste.model.Cupom;
 import com.cupom.CupomTeste.model.Status.Status;
@@ -31,7 +29,6 @@ public interface CupomMapper {
         return value.atOffset(java.time.ZoneOffset.UTC);
     }
 
-    // Se precisar mapear status para string (ou outro DTO)
     default String map(Status status) {
         if (status == null) return null;
         return status.name();

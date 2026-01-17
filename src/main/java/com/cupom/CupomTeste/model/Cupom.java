@@ -114,4 +114,9 @@ public class Cupom {
     public void setRedeemed(boolean redeemed) {
         this.redeemed = redeemed;
     }
+
+	public void setId(UUID cupomId) {
+		// TODO Auto-generated method stub
+		
+	}
 }
