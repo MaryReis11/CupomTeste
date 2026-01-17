@@ -12,7 +12,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API da Loja")
+                        .title("API cupom")
                         .version("1.0")
                         .description("Documentação da API de cupons e produtos"));
     }
